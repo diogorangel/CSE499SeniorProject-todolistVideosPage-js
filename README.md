@@ -54,6 +54,7 @@ Link para abrir o site: http://localhost:8080/Todolist.html
 * Add a "Clear All" button.
 * Implement task categories (Work, Personal, etc.).
 
+
 ## Leticia's Favorite Quote 
 * Genesis 18:14
 * Is anything too hard for the Lord? I will return to you at the appointed time next year, and Sarah will have a son.
@@ -62,3 +63,4 @@ Link para abrir o site: http://localhost:8080/Todolist.html
 ## Favorite quote Diogo Rangel
 * I am I in circustances. If I don't save them, I cannot save myself- José Y Ortega
 * Moses 1:13,17 (...)"thou? For behold, I am a son of God, in the similitude of his Only Begotten; and where is thy glory, that I should worship thee?(...)he also gave me commandments when he called unto me out of the burning bush, saying: Call upon God in the name of mine Only Begotten, and worship me."
+

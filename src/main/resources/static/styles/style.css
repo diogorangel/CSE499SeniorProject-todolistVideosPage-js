@@ -1,82 +1,195 @@
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #f0f2f5;
-    padding: 20px;
+    background: linear-gradient(to bottom right, #ffe8f3, #e8f4ff);
+    padding: 30px 15px;
     display: flex;
     justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    color: #444;
 }
 
+/* MAIN CONTAINER */
 .container {
-    max-width: 600px; /* Slightly wider for the two-column grid */
+    max-width: 750px;
     width: 100%;
-    background: white;
-    padding: 2rem;
-    border-radius: 12px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    background: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(6px);
+    padding: 2.7rem;
+    border-radius: 28px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
 }
 
+/* TITLE */
 h1 {
     text-align: center;
-    color: #333;
-    margin-bottom: 1.5rem;
+    color: #ff5c8a;
+    margin-bottom: 2.2rem;
+    font-size: 2.5rem;
+    letter-spacing: 1px;
 }
 
-/* THE GRID FIX */
-.input-group {
+/* INPUT GRID */
+.input-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr; /* Creates two equal columns */
-    gap: 15px; /* Adds consistent spacing between all fields */
-    margin-bottom: 20px;
+    grid-template-columns: 1fr 1fr;
+    gap: 22px;
+    margin-bottom: 28px;
+    justify-items: center;
 }
 
-.input-group input, 
-.input-group textarea {
-    width: 100%;
-    padding: 12px;
-    border: 1px solid #ddd;
-    border-radius: 6px;
-    box-sizing: border-box; /* Crucial for alignment */
+/* INPUT BOXES */
+.input-grid input,
+.input-grid textarea {
+    width: 92%;
+
+    padding: 16px 18px;
+
+    border: none;
+    border-radius: 18px;
+
+    background: #ffffff;
+
     font-size: 14px;
+    color: #444;
+
+    box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+
+    transition: all 0.25s ease;
 }
 
-/* Make the Description take up both columns */
-.input-group textarea {
+/* PLACEHOLDER */
+.input-grid input::placeholder,
+.input-grid textarea::placeholder {
+    color: #999;
+}
+
+/* FOCUS EFFECT */
+.input-grid input:focus,
+.input-grid textarea:focus {
+    outline: none;
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 6px 18px rgba(0,0,0,0.08),
+        0 0 0 3px rgba(255, 92, 138, 0.2);
+}
+
+/* DESCRIPTION BOX */
+.input-grid textarea {
     grid-column: span 2;
-    height: 80px;
+
+    width: 96%;
+
+    min-height: 120px;
+
     resize: none;
 }
 
-/* Button Styling */
+/* BUTTON */
 button#addButton {
-    grid-column: span 2; /* Button also takes full width */
-    padding: 14px;
-    background-color: #28a745;
+    width: 96%;
+
+    display: block;
+
+    margin: 0 auto 32px auto;
+
+    padding: 16px;
+
+    background: linear-gradient(to right, #ff5c8a, #ff8fab);
+
     color: white;
+
     border: none;
-    border-radius: 6px;
+    border-radius: 18px;
+
     font-weight: bold;
     font-size: 16px;
+
     cursor: pointer;
-    transition: background 0.3s ease;
+
+    transition: 0.25s ease;
+
+    box-shadow: 0 5px 15px rgba(255, 92, 138, 0.3);
 }
 
+/* BUTTON HOVER */
 button#addButton:hover {
-    background-color: #218838;
+    transform: translateY(-2px) scale(1.01);
+
+    box-shadow: 0 8px 20px rgba(255, 92, 138, 0.4);
 }
 
-/* Card Styling */
+/* TASK CARDS */
 .task-card {
-    background: #ffffff;
-    border-left: 5px solid #007bff;
-    border: 1px solid #e1e4e8;
-    border-left: 5px solid #007bff;
-    border-radius: 8px;
-    padding: 20px;
-    margin-top: 15px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    background: white;
+
+    border-radius: 22px;
+
+    padding: 24px;
+
+    margin-top: 22px;
+
+    border-left: 8px solid #7ab8ff;
+
+    box-shadow: 0 5px 15px rgba(0,0,0,0.06);
+
+    transition: 0.25s ease;
 }
 
+/* CARD HOVER */
+.task-card:hover {
+    transform: translateY(-3px);
+}
+
+/* CARD TEXT */
+.task-card h3 {
+    margin-bottom: 12px;
+    color: #444;
+    font-size: 1.3rem;
+}
+
+.task-card p {
+    margin: 8px 0;
+    line-height: 1.6;
+}
+
+/* COMPLETED TASKS */
 .completed {
-    border-left-color: #28a745;
-    background-color: #f8fff9;
+    border-left-color: #7ed957;
+    background-color: #f7fff5;
+}
+
+/* LABELS */
+.label {
+    font-weight: bold;
+    color: #ff5c8a;
+}
+
+/* MOBILE */
+@media (max-width: 650px) {
+
+    .container {
+        padding: 1.8rem;
+    }
+
+    .input-grid {
+        grid-template-columns: 1fr;
+        gap: 18px;
+    }
+
+    .input-grid input,
+    .input-grid textarea,
+    button#addButton {
+        width: 100%;
+    }
+
+    .input-grid textarea {
+        grid-column: span 1;
+    }
+
+    h1 {
+        font-size: 2rem;
+    }
 }
