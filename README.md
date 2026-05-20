@@ -33,7 +33,7 @@ This project is a full-stack Task Management application developed as part of a 
 * npm install
 
 4. Run the application using the Maven Wrapper:
-   mvn spring-boot:run
+   * mvn spring-boot:run
 Link para abrir o site: http://localhost:8080/Todolist.html
 
 ## Software Demo Video
