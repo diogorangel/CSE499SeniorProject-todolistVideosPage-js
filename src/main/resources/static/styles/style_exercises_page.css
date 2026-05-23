@@ -1,0 +1,67 @@
+﻿/* ========================================================================== 
+   STYLE PAGE VIDEOS EXERCISES 
+   ========================================================================== */
+
+.quick-links {
+    margin-bottom: 2rem !important;
+    background: #fdf2f7 !important;
+    padding: 20px !important;
+    border-radius: 18px !important;
+    border: 1px dashed #ff5c8a !important;
+}
+
+.quick-links h2 {
+    font-size: 1.3rem !important;
+    color: #ff5c8a !important;
+    margin-top: 0 !important;
+    margin-bottom: 15px !important;
+    font-weight: bold !important;
+    text-align: left !important;
+}
+
+.links-grid {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 10px !important;
+}
+
+.exercise-link {
+    display: block !important;
+    padding: 12px !important;
+    background: white !important;
+    color: #444 !important;
+    text-decoration: none !important;
+    border-radius: 12px !important;
+    font-weight: 600 !important;
+    font-size: 14px !important;
+    border-left: 5px solid #ff8fab !important;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04) !important;
+    transition: 0.25s ease !important;
+}
+
+.exercise-link:hover {
+    transform: translateX(3px) !important;
+    background: #ffecf1 !important;
+}
+
+#exerciseCounter {
+    text-align: center !important;
+    width: 100% !important;
+    font-weight: bold !important;
+    color: #ff5c8a !important;
+    margin-top: 15px !important;
+    margin-bottom: 15px !important;
+    display: block !important;
+}
+
+@media (max-width: 650px) {
+    .links-grid {
+        grid-template-columns: 1fr !important;
+    }
+}
+
+.task-card.completed {
+    border-left: 8px solid #a2e887 !important;
+    background-color: #f4fbf2 !important;
+    opacity: 0.85 !important;
+}
