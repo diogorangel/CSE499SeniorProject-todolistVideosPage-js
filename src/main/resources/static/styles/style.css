@@ -1,26 +1,29 @@
+/* --- BOOTSTRAP COMPATIBILITY & RESPONSIVENESS ADJUSTMENTS --- */
+
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background: linear-gradient(to bottom right, #ffe8f3, #e8f4ff);
     padding: 30px 15px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     min-height: 100vh;
     color: #444;
 }
 
-/* MAIN CONTAINER */
 .container {
     max-width: 750px;
     width: 100%;
-    background: rgba(255, 255, 255, 0.92);
-    backdrop-filter: blur(6px);
-    padding: 2.7rem;
-    border-radius: 28px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    background: transparent;
+    padding: 0;
+    box-shadow: none;
 }
 
-/* TITLE */
+.main-card-wrapper {
+    background: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(6px);
+    border-radius: 28px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    padding: 2.7rem;
+}
+
 h1 {
     text-align: center;
     color: #ff5c8a;
@@ -29,7 +32,6 @@ h1 {
     letter-spacing: 1px;
 }
 
-/* INPUT GRID */
 .input-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -38,112 +40,75 @@ h1 {
     justify-items: center;
 }
 
-/* INPUT BOXES */
 .input-grid input,
 .input-grid textarea {
     width: 92%;
-
     padding: 16px 18px;
-
     border: none;
     border-radius: 18px;
-
     background: #ffffff;
-
     font-size: 14px;
     color: #444;
-
     box-shadow: 0 4px 12px rgba(0,0,0,0.06);
-
     transition: all 0.25s ease;
 }
 
-/* PLACEHOLDER */
 .input-grid input::placeholder,
 .input-grid textarea::placeholder {
     color: #999;
 }
 
-/* FOCUS EFFECT */
 .input-grid input:focus,
 .input-grid textarea:focus {
     outline: none;
-
     transform: translateY(-2px);
-
     box-shadow:
         0 6px 18px rgba(0,0,0,0.08),
         0 0 0 3px rgba(255, 92, 138, 0.2);
 }
 
-/* DESCRIPTION BOX */
 .input-grid textarea {
     grid-column: span 2;
-
     width: 96%;
-
     min-height: 120px;
-
     resize: none;
 }
 
-/* BUTTON */
 button#addButton {
     width: 96%;
-
     display: block;
-
     margin: 0 auto 32px auto;
-
     padding: 16px;
-
     background: linear-gradient(to right, #ff5c8a, #ff8fab);
-
     color: white;
-
     border: none;
     border-radius: 18px;
-
     font-weight: bold;
     font-size: 16px;
-
     cursor: pointer;
-
     transition: 0.25s ease;
-
     box-shadow: 0 5px 15px rgba(255, 92, 138, 0.3);
 }
 
-/* BUTTON HOVER */
 button#addButton:hover {
     transform: translateY(-2px) scale(1.01);
-
     box-shadow: 0 8px 20px rgba(255, 92, 138, 0.4);
 }
 
-/* TASK CARDS */
 .task-card {
     background: white;
-
     border-radius: 22px;
-
     padding: 24px;
-
     margin-top: 22px;
-
     border-left: 8px solid #7ab8ff;
-
     box-shadow: 0 5px 15px rgba(0,0,0,0.06);
-
     transition: 0.25s ease;
 }
 
-/* CARD HOVER */
 .task-card:hover {
     transform: translateY(-3px);
 }
 
-/* CARD TEXT */
 .task-card h3 {
     margin-bottom: 12px;
     color: #444;
@@ -155,21 +120,70 @@ button#addButton:hover {
     line-height: 1.6;
 }
 
-/* COMPLETED TASKS */
 .completed {
     border-left-color: #7ed957;
     background-color: #f7fff5;
 }
 
-/* LABELS */
 .label {
     font-weight: bold;
     color: #ff5c8a;
 }
 
-/* MOBILE */
-@media (max-width: 650px) {
+.custom-navbar {
+    background: rgba(255, 255, 255, 0.95) !important;
+    backdrop-filter: blur(10px);
+    border-bottom: 2px solid #ffe8f3;
+}
 
+.navbar-brand {
+    color: #ff5c8a !important;
+    font-weight: 700;
+    font-size: 1.1rem;
+}
+
+
+.nav-link-exercise {
+    display: block;
+    padding: 10px 18px;
+    color: #ff5c8a;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 12px;
+    transition: 0.25s ease;
+    border: 1px solid transparent;
+    text-align: center;
+}
+
+.navbar-nav {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: center;
+}
+
+.navbar-nav .nav-item {
+    margin: 0;
+}
+
+.nav-link-exercise:hover, .nav-link-exercise.active {
+    background: #ffecf1;
+    color: #ff5c8a;
+    border-color: #ff8fab;
+}
+
+/* Botão sanduíche customizado para conversar com seu layout */
+.custom-toggler {
+    border-color: #ff8fab !important;
+}
+.custom-toggler:focus {
+    box-shadow: 0 0 0 0.25rem rgba(255, 92, 138, 0.25) !important;
+}
+
+@media (max-width: 650px) {
     .container {
         padding: 1.8rem;
     }
@@ -192,4 +206,72 @@ button#addButton:hover {
     h1 {
         font-size: 2rem;
     }
+}
+
+.card-actions {
+    margin-top: 18px;
+    display: flex;
+    gap: 12px;
+    justify-content: flex-start;
+}
+
+/* Botão de Completar (Estilo Bonito e Arredondado) */
+.card-actions .complete-btn {
+    background: #7ab8ff;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 12px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.2s ease, transform 0.1s ease;
+}
+
+.card-actions .complete-btn:hover {
+    background: #5ba3ff;
+    transform: translateY(-1px);
+}
+
+/* Delete / Remove Button */
+.card-actions .delete-btn {
+    background: #ff5c8a;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 12px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.2s ease, transform 0.1s ease;
+}
+
+.card-actions .delete-btn:hover {
+    background: #ff3c70;
+    transform: translateY(-1px);
+}
+
+/* Estilo visual opcional para quando o card estiver marcado como concluído */
+.task-card.completed {
+    border-left: 8px solid #a2e887;
+    background-color: #f4fbf2;
+    opacity: 0.85;
+}
+
+select.form-select {
+    width: 92% !important;
+    padding: 16px 18px !important; /* Mesma altura dos inputs do seu style.css */
+    font-size: 15px !important;
+    border: 2px solid #ffe8f3 !important;
+    border-radius: 18px !important;
+    background-color: white !important;
+    color: #444 !important;
+    font-weight: 500 !important;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.02) !important;
+    transition: all 0.25s ease !important;
+    cursor: pointer !important;
+}
+
+select.form-select:focus {
+    border-color: #ff5c8a !important;
+    outline: 0 !important;
+    box-shadow: 0 0 0 0.25rem rgba(255, 92, 138, 0.15) !important;
 }
