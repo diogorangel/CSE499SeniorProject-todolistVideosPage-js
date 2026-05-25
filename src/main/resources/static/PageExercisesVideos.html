@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Physical Exercise Manager</title>
+    <meta name="author" content="Diogo Rangel Dos Santos">
+    <meta name="author" content="Leticia Mahomed da Silva">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="styles/style_exercises_page.css">
+</head>
+
+<body>
+
+    <nav class="custom-navbar sticky-top shadow-sm mb-4">
+        <div class="container-fluid px-4 navbar-container">
+            <span class="navbar-brand text-wrap font-weight-bold">To do List Page and Exercises Routine Page</span>
+
+            <input type="checkbox" id="navbar-toggle-check" class="navbar-toggle-check">
+            <label for="navbar-toggle-check" class="custom-toggler">
+                <span class="navbar-toggler-icon"></span>
+            </label>
+
+            <div class="navbar-collapse justify-content-end" id="navbarNav">
+                <ul class="navbar-nav gap-2 mt-2 mt-lg-0">
+                    <li class="nav-item">
+                        <a href="Todolist.html" class="nav-link-exercise">📆 Home Tasks Kanban</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="PageExercisesVideos.html" class="nav-link-exercise active">🏋️ Access to my Exercise
+                            Routine</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="main-card-wrapper">
+            <h1>My Physical Exercises</h1>
+
+            <div class="quick-links">
+                <h2>Workout and Exercise Suggestions (Click to Preview)</h2>
+                <div class="links-grid">
+                    <a href="#" class="exercise-link video-preview-trigger" data-video="ml6cT4AZdqI"
+                        data-title="Home Cardio Workout (15 min)">🏋️ Home Cardio Workout (15 min)</a>
+                    <a href="#" class="exercise-link video-preview-trigger" data-video="g_tea8ZNk5A"
+                        data-title="Complete Morning Stretch">🧘 Complete Morning Stretch</a>
+                    <a href="#" class="exercise-link video-preview-trigger" data-video="y1ARnVfzdNM"
+                        data-title="High-Intensity HIIT Workout">💪 High-Intensity HIIT Workout</a>
+                    <a href="#" class="exercise-link video-preview-trigger" data-video="kVnyY17VS9Y"
+                        data-title="Practical Running Guide for Beginners">🏃 Practical Running Guide for Beginners</a>
+                </div>
+            </div>
+
+            <h3 class="section-title text-center mb-4" style="color: #ff5c8a; font-weight: bold;">Add Exercise to
+                Routine</h3>
+
+            <div class="exercise-input-container">
+                <select id="taskName" class="form-select" onchange="checkEditable(this)">
+                    <option value="" disabled selected>Exercise Task</option>
+                    <option value="System of Training">🏋️ System of Training (Default)</option>
+                    <option value="Home Cardio Workout (15 min)">🏋️ Home Cardio Workout (15 min)</option>
+                    <option value="Complete Morning Stretch">🧘 Complete Morning Stretch</option>
+                    <option value="High-Intensity HIIT Workout">💪 High-Intensity HIIT Workout</option>
+                    <option value="Practical Running Guide for Beginners">🏃 Practical Running Guide for Beginners
+                    </option>
+                    <option value="CUSTOM_OPTION" style="color: #ff5c8a; font-weight: bold;">➕ Type custom creator...
+                    </option>
+                </select>
+
+                <input type="date" id="taskDate" placeholder="Due Date">
+
+                <select id="assignee" class="form-select" onchange="checkEditable(this)">
+                    <option value="" disabled selected>Assignee</option>
+                    <option value="Diogo Rangel Dos Santos">Diogo Rangel Dos Santos</option>
+                    <option value="Leticia Mahomed da Silva">Leticia Mahomed da Silva</option>
+                    <option value="CUSTOM_OPTION" style="color: #ff5c8a; font-weight: bold;">➕ Type custom assignee...
+                    </option>
+                </select>
+
+                <select id="creator" class="form-select" onchange="checkEditable(this)">
+                    <option value="" disabled selected>Creator</option>
+                    <option value="Diogo Rangel Dos Santos">Diogo Rangel Dos Santos</option>
+                    <option value="Leticia Mahomed da Silva">Leticia Mahomed da Silva</option>
+                    <option value="CUSTOM_OPTION" style="color: #ff5c8a; font-weight: bold;">➕ Type custom assignee...
+                    </option>
+                </select>
+
+                <textarea id="description" placeholder="Description / Link"></textarea>
+            </div>
+
+            <button type="button" id="addButton" class="w-100 mb-4 btn-custom">Add Exercise to Routine / Create Card</button>
+            <div id="exerciseCounter" style="margin-top: 15px; font-weight: bold; color: #ff5c8a;">Total Exercises: 0
+            </div>
+            <div id="cardContainer" class="mt-4"></div>
+        </div>
+    </div>
+
+    <dialog id="videoModal" class="native-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="videoModalLabel">Workout Preview</h5>
+                <button type="button" class="btn-close" id="closeModalBtn" aria-label="Close">&times;</button>
+            </div>
+            <div class="modal-body p-0 bg-black">
+                <div class="ratio ratio-16x9">
+                    <iframe id="videoPlayerFrame" src="" title="YouTube video player"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen></iframe>
+                </div>
+            </div>
+        </div>
+    </dialog>
+
+    <footer class="text-center mt-4 mb-2">
+        <p>&copy; 2026 Diogo Rangel Dos Santos. All rights reserved. <a href="https://www.linkedin.com/in/diogorangels/"
+                target="_blank">Diogo Rangel Dos Santos</a>. All Rights Reserved.</p>
+        <p>&copy; 2026 Leticia Mahomed da Silva. All rights reserved. <a href="https://www.linkedin.com/in/letmahomed/"
+                target="_blank">Leticia Mahomed da Silva</a>. All Rights Reserved.</p>
+    </footer>
+
+    <script src="scripts/exercisesvideos.js"></script>
+</body>
+
+</html>
