@@ -1,7 +1,109 @@
-﻿/* ========================================================================== 
+/* ========================================================================== 
    STYLE PAGE VIDEOS EXERCISES 
    ========================================================================== */
 
+/* Custom Navbar Base System */
+.custom-navbar {
+    width: 100%;
+    background-color: #fff;
+    box-shadow: 0 .125rem .25rem rgba(0,0,0,0.075);
+    padding: 0.6rem 1.2rem;
+    box-sizing: border-box;
+}
+
+.sticky-top {
+    position: sticky;
+    top: 0;
+    z-index: 1020;
+}
+
+.navbar-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.navbar-brand {
+    font-weight: bold;
+    color: #444;
+    font-size: 1.15rem;
+    text-decoration: none;
+}
+
+/* Custom Hamburger */
+.navbar-toggle-check { 
+    display: none; 
+}
+
+.custom-toggler { 
+    cursor: pointer; 
+    padding: .35rem .6rem; 
+    background: transparent; 
+    border: 1px solid rgba(0,0,0,0.1); 
+    border-radius: .35rem; 
+    display: none; 
+}
+
+.navbar-toggler-icon { 
+    display: block; 
+    width: 22px; 
+    height: 2px; 
+    background: #555; 
+    position: relative; 
+}
+
+.navbar-toggler-icon::before, 
+.navbar-toggler-icon::after { 
+    content: ''; 
+    position: absolute; 
+    width: 22px; 
+    height: 2px; 
+    background: #555; 
+    left: 0; 
+}
+
+.navbar-toggler-icon::before { 
+    top: -6px; 
+}
+
+.navbar-toggler-icon::after { 
+    bottom: -6px; 
+}
+
+.navbar-collapse { 
+    display: flex; 
+    align-items: center; 
+}
+
+.navbar-nav { 
+    display: flex; 
+    list-style: none; 
+    gap: 12px; 
+    margin: 0; 
+    padding: 0; 
+}
+
+.nav-link-exercise {
+    display: inline-block;
+    padding: 10px 16px;
+    background: #e8f4ff;
+    color: #5ba3ff;
+    text-decoration: none;
+    border-radius: 14px;
+    font-weight: bold;
+    transition: all 0.2s ease;
+}
+
+.nav-link-exercise:hover, 
+.nav-link-exercise.active {
+    background: #ff5c8a;
+    color: white;
+}
+
+/* Quick Links Cards Area */
 .quick-links {
     margin-bottom: 2rem !important;
     background: #fdf2f7 !important;
@@ -45,23 +147,177 @@
 }
 
 #exerciseCounter {
-    text-align: center !important;
-    width: 100% !important;
-    font-weight: bold !important;
-    color: #ff5c8a !important;
-    margin-top: 15px !important;
-    margin-bottom: 15px !important;
-    display: block !important;
+    text-align: center;
+    font-weight: bold;
+    color: #ff5c8a;
+    margin-bottom: 15px;
 }
 
-@media (max-width: 650px) {
-    .links-grid {
-        grid-template-columns: 1fr !important;
+/* Modal Estrutural Nativo */
+.native-modal {
+    border: none;
+    border-radius: 28px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+    padding: 0;
+    width: 90%;
+    max-width: 620px;
+    margin: auto;
+    background: white;
+}
+
+.native-modal::backdrop {
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(4px);
+}
+
+.modal-content { 
+    display: flex; 
+    flex-direction: column; 
+    overflow: hidden; 
+    border-radius: 28px; 
+}
+
+.modal-header { 
+    background: #fdf2f7; 
+    border-bottom: 1px dashed #ff5c8a; 
+    padding: 1.1rem; 
+    display: flex; 
+    align-items: center; 
+    justify-content: space-between; 
+}
+
+.modal-title { 
+    color: #ff5c8a; 
+    font-weight: bold; 
+    font-size: 1.2rem; 
+}
+
+.btn-close { 
+    background: transparent; 
+    border: none; 
+    font-size: 1.8rem; 
+    color: #ff5c8a; 
+    cursor: pointer; 
+    line-height: 1; 
+}
+
+.ratio-16x9 { 
+    position: relative; 
+    width: 100%; 
+    padding-top: 56.25%; 
+    background: #000; 
+}
+
+.ratio-16x9 iframe { 
+    position: absolute; 
+    top: 0; 
+    left: 0; 
+    width: 100%; 
+    height: 100%; 
+    border: none; 
+}
+
+/* ==========================================================================
+   Exercise Input Form Section (Customized Layout)
+   ========================================================================== */
+
+.exercise-input-container {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important; /* Two symmetric columns */
+    gap: 22px !important;
+    margin-bottom: 28px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+}
+
+/* Visual standardization for all field types */
+.exercise-input-container select.form-select,
+.exercise-input-container input[type="date"],
+.exercise-input-container textarea {
+    width: 100% !important;
+    padding: 16px 18px !important;
+    font-size: 15px !important;
+    border: 2px solid #fff !important;
+    border-radius: 18px !important;
+    background-color: #ffffff !important;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.06) !important;
+    outline: none !important;
+    box-sizing: border-box !important;
+    transition: all 0.25s ease !important;
+}
+
+/* Fixed height for inputs and selects */
+.exercise-input-container select.form-select,
+.exercise-input-container input[type="date"] {
+    height: 54px !important;
+}
+
+/* Custom pink arrow for select elements */
+.exercise-input-container select.form-select {
+    appearance: none !important;
+    -webkit-appearance: none !important;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'><path fill='%23ff5c8a' d='M0 0l5 5 5-5z'/></svg>") !important;
+    background-repeat: no-repeat !important;
+    background-position: right 18px center !important;
+    background-size: 12px !important;
+    cursor: pointer !important;
+}
+
+/* Textarea spans full width */
+.exercise-input-container textarea {
+    grid-column: span 2 !important;
+    min-height: 110px !important;
+    resize: none !important;
+}
+
+/* Interactive focus effect on field interaction */
+.exercise-input-container select.form-select:focus,
+.exercise-input-container input[type="date"]:focus,
+.exercise-input-container textarea:focus {
+    transform: translateY(-2px) !important;
+    border-color: rgba(255, 92, 138, 0.1) !important;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.08), 0 0 0 3px rgba(255, 92, 138, 0.2) !important;
+}
+
+/* ==========================================================================
+   Responsive Media Queries
+   ========================================================================== */
+
+@media (max-width: 991px) {
+    .custom-toggler { 
+        display: block; 
+    }
+    .navbar-collapse { 
+        display: none; 
+        width: 100%; 
+        margin-top: 10px; 
+    }
+    .navbar-toggle-check:checked ~ .navbar-collapse { 
+        display: block; 
+    }
+    .navbar-nav { 
+        flex-direction: column; 
+        width: 100%; 
+        gap: 8px; 
+    }
+    .nav-link-exercise { 
+        width: 100%; 
+        text-align: center; 
     }
 }
 
-.task-card.completed {
-    border-left: 8px solid #a2e887 !important;
-    background-color: #f4fbf2 !important;
-    opacity: 0.85 !important;
+@media (max-width: 768px) {
+    .links-grid { 
+        grid-template-columns: 1fr !important; 
+    }
+}
+
+@media (max-width: 650px) {
+    .exercise-input-container {
+        grid-template-columns: 1fr !important;
+        gap: 18px !important;
+    }
+    .exercise-input-container textarea {
+        grid-column: span 1 !important;
+    }
 }

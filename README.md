@@ -34,7 +34,44 @@ This project is a full-stack Task Management application developed as part of a 
 
 4. Run the application using the Maven Wrapper:
    * mvn spring-boot:run
-Link para abrir o site: http://localhost:8080/Todolist.html
+Link to open the website: http://localhost:8080/Todolist.html
+
+5. Others commands mvn:
+### Spring Boot Commands
+
+* **Run the application locally:**
+  ```mvn spring-boot:run```
+* **Run with a specific profile (ex: dev, prod):**
+  ```mvn spring-boot:run -Dspring-boot.run.profiles=dev ```
+* **Run with command line arguments:**
+  ```mvn spring-boot:run -Dspring-boot.run.arguments="--server.port=8081"```
+* **Build a Docker image of the application (Buildpacks):**
+  ```mvn spring-boot:build-image```
+
+### Build Lifecycle (Maven)
+
+| Command | Description |
+| :--- | :--- |
+| `mvn clean` | Cleans the `target` folder (removes previous builds). |
+| `mvn compile` | Compiles the project source code. |
+| `mvn test` | Runs unit tests. |
+| `mvn package` | Packages the application into an executable `.jar`. |
+| `mvn install` | Installs the generated package into your local repository (`.m2`). |
+
+### Common Combinations
+
+* **Clean full build:**
+  ```mvn clean install```
+* **Generate executable JAR skipping tests:**
+  ```mvn clean package -DskipTests```
+
+### Dependency Management
+
+* **View dependency tree (to resolve conflicts):**
+  ```mvn dependency:tree```
+* **Force update dependencies:**
+  ```mvn clean install -U```
+   
 
 ## Software Demo Video
 * [Link to your YouTube/Loom video here](https://www.loom.com/share/2bbf9d36d42b4200b1aef99093c415ef)

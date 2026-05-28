@@ -3,45 +3,43 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Professional JS To-Do List</title>
+    <title>To-Do List Kanban</title>
     <meta name="author" content="Diogo Rangel Dos Santos">
     <meta name="author" content="Leticia Mahomed da Silva">
     <meta name="description" content="A simple to-do list application built with JavaScript - Diogo Rangel">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="styles/style.css">
-    <!-- <link rel="stylesheet" href="styles/style.css?v=2"> -->
     <link rel="stylesheet" href="styles/style_exercises_page.css">
 </head>
 
 <body>
 
-    <nav class="navbar navbar-expand-lg custom-navbar sticky-top shadow-sm mb-4">
-        <div class="container-fluid px-4">
+    <nav class="custom-navbar sticky-top shadow-sm mb-4">
+        <div class="container-fluid px-4 navbar-container">
             <span class="navbar-brand text-wrap font-weight-bold">To do List Page and Exercises Routine Page</span>
-            <button class="navbar-toggler custom-toggler" type="button" data-bs-toggle="collapse"
-                data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
-                aria-label="Toggle navigation">
+            
+            <input type="checkbox" id="navbar-toggle-check" class="navbar-toggle-check">
+            <label for="navbar-toggle-check" class="custom-toggler">
                 <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+            </label>
+
+            <div class="navbar-collapse justify-content-end" id="navbarNav">
                 <ul class="navbar-nav gap-2 mt-2 mt-lg-0">
                     <li class="nav-item">
                         <a href="Todolist.html" class="nav-link-exercise active">📆 Home Tasks Kanban</a>
                     </li>
                     <li class="nav-item">
-                        <a href="PageExercisesVideos.html" class="nav-link-exercise">🏋️ Access to my Exercise
-                            Routine</a>
+                        <a href="PageExercisesVideos.html" class="nav-link-exercise">🏋️ Access to my Exercise Routine</a>
                     </li>
                 </ul>
             </div>
         </div>
     </nav>
 
-    <div class="container my-4 px-3 px-sm-4 px-md-5">
-        <div class="main-card-wrapper p-4 p-sm-5">
-            <h1>My tasks</h1>
+    <div class="container">
+        <div class="main-card-wrapper">
+            <h1>My To-Do List Tasks Kanban</h1>
 
             <div class="quick-links">
                 <h2>Task Management Tips</h2>
@@ -53,7 +51,8 @@
                 </div>
             </div>
 
-            <div class="input-grid mb-4">
+            <div class="input-grid">
+                <!-- <input type="text" id="taskName" placeholder="Task Name"> -->
                 <select id="taskName" class="form-select" onchange="checkEditable(this)">
                     <option value="" disabled selected>Task Name</option>
                     <option value="Create clear task names for better organization">✅ Create clear task names for better
@@ -64,21 +63,21 @@
                     <option value="CUSTOM_OPTION" style="color: #ff5c8a; font-weight: bold;">➕ Type custom text...
                     </option>
                 </select>
+                <input type="date" id="taskDate">
                 <select id="assignee" class="form-select" onchange="checkEditable(this)">
-                    <option value="" disabled selected>Assign to someone</option>
+                    <option value="" disabled selected>Assignee</option>
                     <option value="Diogo Rangel Dos Santos">Diogo Rangel Dos Santos</option>
                     <option value="Leticia Mahomed da Silva">Leticia Mahomed da Silva</option>
-                    <option value="CUSTOM_OPTION" style="color: #ff5c8a; font-weight: bold;">➕ Type custom name...
-                    </option>
+                    <option value="CUSTOM_OPTION" style="color: #ff5c8a; font-weight: bold;">➕ Type custom assignee...</option>
                 </select>
 
                 <select id="creator" class="form-select" onchange="checkEditable(this)">
                     <option value="" disabled selected>Created by</option>
                     <option value="Diogo Rangel Dos Santos">Diogo Rangel Dos Santos</option>
                     <option value="Leticia Mahomed da Silva">Leticia Mahomed da Silva</option>
-                    <option value="CUSTOM_OPTION" style="color: #ff5c8a; font-weight: bold;">➕ Type custom creator...
-                    </option>
+                    <option value="CUSTOM_OPTION" style="color: #ff5c8a; font-weight: bold;">➕ Type custom creator...</option>
                 </select>
+
                 <input type="text" id="oneWord" placeholder="One Word">
                 <textarea id="description" placeholder="Description / Notes"></textarea>
             </div>
@@ -88,14 +87,13 @@
             <div id="cardContainer"></div>
         </div>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="scripts/script.js?v=2"></script>
+
     <footer class="text-center mt-4 mb-2">
-        <p>&copy; 2026 Diogo Rangel Dos Santos. All rights reserved.<a
-                href="https://www.linkedin.com/in/diogorangels/">Diogo Rangel Dos Santos</a>. All Rights Reserved.</p>
-        <p>&copy; 2026 Leticia Mahomed da Silva. All rights reserved.<a
-                href="https://www.linkedin.com/in/letmahomed/">Leticia Mahomed da Silva</a>. All Rights Reserved.</p>
+        <p>&copy; 2026 Diogo Rangel Dos Santos. All rights reserved. <a href="https://www.linkedin.com/in/diogorangels/" target="_blank">Diogo Rangel Dos Santos</a>. All Rights Reserved.</p>
+        <p>&copy; 2026 Leticia Mahomed da Silva. All rights reserved. <a href="https://www.linkedin.com/in/letmahomed/" target="_blank">Leticia Mahomed da Silva</a>. All Rights Reserved.</p>
     </footer>
+
+    <script src="scripts/script.js?v=2"></script>
 </body>
 
 </html>

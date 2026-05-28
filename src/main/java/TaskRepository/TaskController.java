@@ -2,61 +2,71 @@ package TaskRepository;
 
 import org.springframework.web.bind.annotation.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.ResponseEntity;
 import java.util.List;
+import java.util.Optional;
+
+import TaskRepository.Task;
+import TaskRepository.TaskRepository;
 
 @RestController
 @RequestMapping("/api/tasks")
-@CrossOrigin(origins = "*", allowedHeaders = "*", methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE})
+@CrossOrigin(origins = "*")
 public class TaskController {
 
     @Autowired
     private TaskRepository repository;
 
-    // READ: List cards
     @GetMapping
     public List<Task> getTasks() {
         return repository.findAll();
     }
 
-    // CREATE: Create card
     @PostMapping
     public Task createTask(@RequestBody Task task) {
         return repository.save(task);
     }
 
-    // UPDATE: Toggle completion status
     @PutMapping("/{id}")
-    public ResponseEntity<Task> updateTask(@PathVariable Long id, @RequestBody Task taskDetails) {
-        try {
-            return repository.findById(id).map(task -> {
-                task.setCompleted(taskDetails.isCompleted());
-                Task updatedTask = repository.save(task);
-                return ResponseEntity.ok(updatedTask);
-            }).orElse(ResponseEntity.notFound().build());
-        } catch (Exception e) {
-            System.err.println("❌ ERROR UPDATING TASK IN BACKEND:");
-            e.printStackTrace();
-            return ResponseEntity.internalServerError().build();
-        }
+    public ResponseEntity<Task> updateTask(@PathVariable Long id, @RequestBody Task update) {
+        return repository.findById(id)
+            .map(task -> {
+                task.setCompleted(update.isCompleted());
+                return ResponseEntity.ok(repository.save(task));
+            })
+            .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-    // DELETE: Remove card
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteTask(@PathVariable Long id) {
         try {
-            System.out.println("🔄 Attempting to remove card with ID: " + id);
-            if (repository.existsById(id)) {
-                repository.deleteById(id);
-                System.out.println("✅ Card with ID " + id + " removed successfully.");
-                return ResponseEntity.ok().build();
-            }
-            System.out.println("⚠️ Card with ID " + id + " was not found in the database.");
+            repository.deleteById(id);
+            return ResponseEntity.ok().build();
+        } catch (EmptyResultDataAccessException e) {
             return ResponseEntity.notFound().build();
-        } catch (Exception e) {
-            System.err.println("❌ REAL ERROR REMOVING TASK IN BACKEND:");
-            e.printStackTrace(); // This will print the exact error in the Java terminal
-            return ResponseEntity.internalServerError().build();
         }
+    }
+
+    @PostMapping("/deleteByData")
+    public ResponseEntity<Void> deleteTaskByData(@RequestBody Task taskData) {
+        Optional<Task> found = repository.findAll().stream()
+            .filter(t -> equalsOrNull(t.getTaskName(), taskData.getTaskName())
+                    && equalsOrNull(t.getDueDate(), taskData.getDueDate())
+                    && equalsOrNull(t.getAssignee(), taskData.getAssignee())
+                    && equalsOrNull(t.getCreator(), taskData.getCreator())
+                    && equalsOrNull(t.getDescription(), taskData.getDescription()))
+            .findFirst();
+
+        if (found.isPresent()) {
+            repository.deleteById(found.get().getId());
+            return ResponseEntity.ok().build();
+        }
+
+        return ResponseEntity.notFound().build();
+    }
+
+    private boolean equalsOrNull(Object a, Object b) {
+        return a == b || (a != null && a.equals(b));
     }
 }

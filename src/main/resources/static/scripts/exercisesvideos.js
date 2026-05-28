@@ -1,29 +1,32 @@
-// References to DOM elements
+// Global DOM element references
 const taskNameInput = document.getElementById('taskName');
+const taskDateInput = document.getElementById('taskDate'); 
 const assigneeInput = document.getElementById('assignee');
 const creatorInput = document.getElementById('creator');
-const taskDateInput = document.getElementById('taskDate'); 
 const descriptionInput = document.getElementById('description');
 const addButton = document.getElementById('addButton');
 const cardContainer = document.getElementById('cardContainer');
 
-// Utility function to detect URLs in text and turn them into clickable HTML links
+const videoModalElement = document.getElementById('videoModal');
+const videoFrame = document.getElementById('videoPlayerFrame');
+const videoModalLabel = document.getElementById('videoModalLabel');
+const closeModalBtn = document.getElementById('closeModalBtn');
+
+
 function urlify(text) {
+    if (!text) return '';
     const urlRegex = /(https?:\/\/[^\s]+)/g;
     return text.replace(urlRegex, function(url) {
         return `<a href="${url}" target="_blank" style="color: #ff5c8a; font-weight: bold; text-decoration: underline;">${url}</a>`;
     });
 }
 
-/**
- * Renders workouts/tasks coming from the SQLite database via Spring Boot
- */
+// Render exercises from Spring Boot API
 async function renderCards() {
     try {
         const response = await fetch('/api/tasks');
         const tasks = await response.json(); 
 
-        // Calculate the total number of exercises and completed items
         const totalExercises = tasks.length;
         const completedExercises = tasks.filter(task => task.completed === true || task.completed === 1).length;
 
@@ -37,221 +40,172 @@ async function renderCards() {
 
         tasks.forEach((task) => {
             const card = document.createElement('div');
-            
-            // Ensure the completion state is read correctly
-            const isTaskCompleted = task.completed === true || task.completed === 1;
-            
-            card.className = `task-card ${isTaskCompleted ? 'completed' : ''}`;
+            card.className = `task-card ${task.completed ? 'completed' : ''}`;
 
             card.innerHTML = `
-                <h3>${task.taskName}</h3>
-                <p><strong>Workout Date:</strong> ${task.dueDate || 'No date set'}</p>
-                <p><strong>Who will do it:</strong> ${task.assignee || 'Unassigned'}</p>
-                <p><strong>Workout Creator:</strong> ${task.creator || 'No creator'}</p>
-                <p><strong>Description / Link:</strong> ${urlify(task.description || 'No description provided')}</p>
+                <h3>${task.taskName || 'Untitled Exercise'}</h3>
+                <p><span class="label">Due Date:</span> ${task.dueDate || 'N/A'}</p>
+                <p><span class="label">Assignee:</span> ${task.assignee || 'None'}</p>
+                <p><span class="label">Created by:</span> ${task.creator || 'None'}</p>
+                <p><span class="label">Notes / Link:</span> ${urlify(task.description || '')}</p>
                 
                 <div class="card-actions">
-                    <button class="complete-btn" onclick="toggleComplete(${task.id}, ${isTaskCompleted})">
-                        ${isTaskCompleted ? '⏹️ Undo' : '✅ Complete'}
+                    <button class="complete-btn" onclick="toggleComplete(${task.id}, ${task.completed})">
+                        ${task.completed ? '🔄 Undo' : '✅ Complete'}
                     </button>
-                    <button class="delete-btn" onclick="removeTask(${task.id})">
-                        ❌ Remove
-                    </button>
+                    <button class="delete-btn" onclick="deleteCard(${task.id})">🗑️ Delete</button>
                 </div>
             `;
             cardContainer.appendChild(card);
         });
+
     } catch (error) {
-        console.error("Failed to render cards:", error);
+        console.error("Error rendering exercise cards:", error);
     }
 }
 
-// Initial binding of the Add Button click event
-if (addButton) {
-    addButton.addEventListener('click', createExerciseCard);
-}
+// Setup listeners after DOM content loads
+document.addEventListener('DOMContentLoaded', () => {
+    renderCards();
 
-// Automatically load existing records when the script loads
-renderCards();
-
-/**
- * Captures form inputs and sends them to the REST API via POST
- */
-async function createExerciseCard() {
-    const name = taskNameInput ? taskNameInput.value.trim() : '';
-    const date = taskDateInput ? taskDateInput.value : '';
-    const assignee = assigneeInput ? assigneeInput.value : '';
-    const creator = creatorInput ? creatorInput.value : '';
-    const desc = descriptionInput ? descriptionInput.value.trim() : '';
-
-    // Basic required-field validation
-    if (!name) {
-        alert("Please enter or select an Exercise Name.");
-        return;
-    }
-
-    if (!assignee) {
-        alert("Please choose or enter an assignee.");
-        return;
-    }
-
-    if (!creator) {
-        alert("Please choose or enter a creator.");
-        return;
-    }
-
-    if (!desc) {
-        alert("Please enter a description or link.");
-        return;
-    }
-
-    const newTask = {
-        taskName: name,
-        dueDate: date,
-        assignee: assignee,
-        creator: creator,
-        description: desc,
-        completed: false
-    };
-
-    try {
-        const response = await fetch('/api/tasks', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(newTask)
+    // HTML5 native modal manager for videos
+    if (videoModalElement) {
+        document.querySelectorAll('.video-preview-trigger').forEach(trigger => {
+            trigger.addEventListener('click', (e) => {
+                e.preventDefault(); 
+                
+                const videoId = trigger.getAttribute('data-video');
+                const videoTitle = trigger.getAttribute('data-title');
+                
+                if (videoModalLabel && videoTitle) {
+                    videoModalLabel.textContent = `Preview: ${videoTitle}`;
+                }
+                
+                if (videoFrame && videoId) {
+                    videoFrame.src = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
+                    videoModalElement.showModal();
+                }
+            });
         });
 
-        if (response.ok) {
-            clearInputs();
-            renderCards(); 
+        if (closeModalBtn) {
+            closeModalBtn.addEventListener('click', () => {
+                videoModalElement.close();
+            });
         }
-    } catch (error) {
-        console.error("Failed to create exercise task:", error);
-    }
-}
 
-/**
- * Updates the completion status in the database
- */
+        // Reset frame when closing to stop YouTube audio
+        videoModalElement.addEventListener('close', () => {
+            if (videoFrame) {
+                videoFrame.src = "";
+            }
+        });
+    }
+
+    // Form submission listener attached to native button
+    if (addButton) {
+        addButton.addEventListener('click', async () => {
+            const taskName = taskNameInput ? taskNameInput.value : '';
+            const dueDate = taskDateInput ? taskDateInput.value : '';
+            const assignee = assigneeInput ? assigneeInput.value : '';
+            const creator = creatorInput ? creatorInput.value : '';
+            const description = descriptionInput ? descriptionInput.value : '';
+
+            if (!taskName || taskName.trim() === "") {
+                alert("⚠️ Please select or type an exercise!");
+                return;
+            }
+
+            const newTask = {
+                taskName: taskName,
+                dueDate: dueDate ? dueDate : null,
+                assignee: assignee ? assignee : null,
+                creator: creator ? creator : null,
+                description: description ? description : null,
+                completed: false
+            };
+
+            try {
+                const response = await fetch('/api/tasks', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(newTask)
+                });
+
+                if (response.ok) {
+                    alert("✅ Exercise successfully added to routine!");
+                    
+                    // Reset all form fields
+                    if (taskNameInput) taskNameInput.value = '';
+                    if (taskDateInput) taskDateInput.value = '';
+                    if (assigneeInput) assigneeInput.value = '';
+                    if (creatorInput) creatorInput.value = '';
+                    if (descriptionInput) descriptionInput.value = '';
+                    
+                    renderCards();
+                } else {
+                    const errTxt = await response.text();
+                    alert(`❌ Failed to save card: ${errTxt}`);
+                }
+            } catch (error) {
+                console.error("Error creating custom routing exercise:", error);
+                alert("❌ Connection network error or server is down!");
+            }
+        });
+    }
+});
+
+// Functions exposed globally for dynamic click listeners
 async function toggleComplete(id, currentStatus) {
-    const newStatus = !currentStatus;
     try {
-        await fetch(`/api/tasks/${id}`, {
+        const response = await fetch(`/api/tasks/${id}`, {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ completed: newStatus })
+            body: JSON.stringify({ completed: !currentStatus })
         });
-        renderCards();
-    } catch (error) {
-        console.error("Failed to toggle task status:", error);
-    }
-}
-
-/**
- * Removes the exercise from the database with confirmation
- */
-async function removeTask(id) {
-    const userConfirmed = confirm("Do you really want to remove this exercise from your routine?");
-
-    if (userConfirmed) {
-        try {
-            const response = await fetch(`/api/tasks/${id}`, {
-                method: 'DELETE'
-            });
-
-            if (response.ok) {
-                renderCards(); 
-            } else {
-                alert("Error deleting the exercise.");
-            }
-        } catch (error) {
-            console.error("Failed to delete:", error);
+        if (response.ok) {
+            renderCards();
         }
+    } catch (error) {
+        console.error("Error updating task status:", error);
     }
 }
 
-/**
- * Clears form field elements and returns select selectors back to placeholder options
- */
-function clearInputs() {
-    if (taskNameInput) taskNameInput.value = '';
-    if (taskDateInput) taskDateInput.value = '';
-    if (descriptionInput) descriptionInput.value = '';
-    if (assigneeInput) assigneeInput.value = '';
-    if (creatorInput) creatorInput.value = '';
+async function deleteCard(id) {
+    if (!confirm("Are you sure you want to delete this exercise?")) return;
+    try {
+        const response = await fetch(`/api/tasks/${id}`, { method: 'DELETE' });
+        if (response.ok) {
+            renderCards();
+        }
+    } catch (error) {
+        console.error("Error removing card:", error);
+    }
 }
-
-/**
- * Allows adding custom options dynamically to dropdown menus using modal prompt flows
- */
 function checkEditable(selectElement) {
     if (selectElement.value === "CUSTOM_OPTION") {
-        // Automatically determine field identity to serve customized prompts
-        const fieldName = selectElement.id === "assignee" ? "assignee name" : "creator name/routine";
+        const fieldName = selectElement.id === "assignee"
+            ? "assignee name"
+            : selectElement.id === "creator"
+                ? "creator name"
+                : "task name";
         
-        // Open native dialogue entry box
         const customText = prompt(`Enter your custom ${fieldName}:`);
         
         if (customText && customText.trim() !== "") {
             const cleanText = customText.trim();
             
-            // Build brand new option tag structure
             const newOption = document.createElement("option");
             newOption.value = cleanText;
             newOption.text = cleanText;
             newOption.selected = true;
             
-            // Drop newly configured option directly above the custom field trigger line
             selectElement.add(newOption, selectElement.options[selectElement.options.length - 1]);
         } else {
-            // Revert back to unchosen empty state if interaction cancelled
             selectElement.value = "";
         }
     }
 }
-
-// Global variable binding to preserve scope visibility for inline HTML attributes
+window.toggleComplete = toggleComplete;
+window.deleteCard = deleteCard;
 window.checkEditable = checkEditable;
-
-// =========================================================================
-// --- INTERACTIVE VIDEO PREVIEW LOGIC IN MODAL (BOOTSTRAP 5) ---
-// =========================================================================
-document.addEventListener("DOMContentLoaded", () => {
-    const videoModalElement = document.getElementById('videoPreviewModal');
-    const videoFrame = document.getElementById('videoPlayerFrame');
-    const videoModalLabel = document.getElementById('videoModalLabel');
-    
-    // Check if the modal element exists on the current page before initializing
-    if (videoModalElement) {
-        // Initialize the Bootstrap modal programmatically
-        const bootstrapModal = new bootstrap.Modal(videoModalElement);
-
-        // Listen for clicks on exercise links with the defined class
-        document.querySelectorAll('.video-preview-trigger').forEach(trigger => {
-            trigger.addEventListener('click', (e) => {
-                e.preventDefault(); // Prevent page navigation or jumping to the top
-                
-                const videoId = trigger.getAttribute('data-video');
-                const videoTitle = trigger.getAttribute('data-title');
-                
-                // Set the corresponding title in the modal dynamically
-                if (videoModalLabel && videoTitle) {
-                    videoModalLabel.textContent = `Preview: ${videoTitle}`;
-                }
-                
-                // Build the YouTube embed URL with autoplay enabled
-                if (videoFrame && videoId) {
-                    videoFrame.src = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
-                    bootstrapModal.show(); // Open the preview modal
-                }
-            });
-        });
-
-        // Event fired when the modal has finished closing completely
-        videoModalElement.addEventListener('hidden.bs.modal', () => {
-            if (videoFrame) {
-                videoFrame.src = ""; // Reset the src to stop streaming and audio immediately
-            }
-        });
-    }
-});
