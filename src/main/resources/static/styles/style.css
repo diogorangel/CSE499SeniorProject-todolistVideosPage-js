@@ -30,7 +30,7 @@ body {
 
 h1 {
     text-align: center;
-    color: #ff5c8a;
+    color: #382feb;
     margin-bottom: 2.2rem;
     font-size: 2.5rem;
     letter-spacing: 1px;
@@ -84,7 +84,7 @@ h1 {
 button#addButton {
     width: 100%;
     padding: 16px;
-    background: linear-gradient(to right, #ff5c8a, #ff8fab);
+    background: linear-gradient(to right, #353bea, #4a4de8);
     color: white;
     border: none;
     border-radius: 18px;
@@ -115,16 +115,16 @@ button#addButton:hover {
 .task-card h3 { margin-bottom: 12px; color: #444; font-size: 1.3rem; }
 .task-card p { margin: 8px 0; line-height: 1.6; }
 .task-card.completed { border-left: 8px solid #a2e887; background-color: #f4fbf2; opacity: 0.85; }
-.label { font-weight: bold; color: #ff5c8a; }
+.label { font-weight: bold; color: #1f37f3; }
 
 .card-actions { display: flex; gap: 12px; margin-top: 15px; }
 .card-actions .complete-btn { background: #7ab8ff; color: white; border: none; padding: 8px 16px; border-radius: 12px; font-weight: bold; cursor: pointer; transition: 0.2s; }
 .card-actions .complete-btn:hover { background: #5ba3ff; transform: translateY(-1px); }
-.card-actions .delete-btn { background: #ff5c8a; color: white; border: none; padding: 8px 16px; border-radius: 12px; font-weight: bold; cursor: pointer; transition: 0.2s; }
-.card-actions .delete-btn:hover { background: #ff3c70; transform: translateY(-1px); }
+.card-actions .delete-btn { background: #4929ea; color: white; border: none; padding: 8px 16px; border-radius: 12px; font-weight: bold; cursor: pointer; transition: 0.2s; }
+.card-actions .delete-btn:hover { background: #1a16e0; transform: translateY(-1px); }
 
 footer { text-align: center; width: 100%; padding: 20px 0; font-size: 14px; color: #777; margin-top: auto; }
-footer a { color: #ff5c8a; text-decoration: none; font-weight: bold; }
+footer a { color: #113dea; text-decoration: none; font-weight: bold; }
 footer a:hover { text-decoration: underline; }
 
 @media (max-width: 650px) {

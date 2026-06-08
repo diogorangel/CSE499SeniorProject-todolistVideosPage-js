@@ -4,10 +4,10 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>git.diogorangel</groupId>
-    <artifactId>cse499seniorproject-todolist-js</artifactId>
+    <artifactId>cse499seniorproject-todolistVideosPage-js</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <name>cse499seniorproject-todolist-js</name>
-    <description>WebApp Task Manager com Spring Boot e SQLite</description>
+    <name>cse499seniorproject-todolistVideosPage-js</name>
+    <description>WebApp Task and Videos Exercises Manager com Spring Boot e SQLite</description>
 
     <parent>
         <groupId>org.springframework.boot</groupId>

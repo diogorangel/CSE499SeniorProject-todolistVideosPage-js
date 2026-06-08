@@ -1,9 +1,8 @@
 # Overview CSE 499 Senior Project- Web-Based To-Do List and Web View Exercises Video
 
-# Author : Diogo Rangel Dos Santos (@_diogorangel) and Leticia Mahomed da Silva (@_LetMahomed)
-
+# Author : Diogo Rangel Dos Santos (@_diogorangel)
 ## Overview
-# Task Card Manager - WebApp (Java Edition)
+# Task Card Manager and Videos Page Tasks - WebApp (Java Edition Including Node.js, SQL and others)
 
 ## 📌 Overview
 This project is a full-stack Task Management application developed as part of a technical module focused on **Software Engineering and Web Development**. Originally conceived in Node.js, the application was transitioned to a **Java (Spring Boot)** architecture to implement a robust WebApp service integrated with a relational database.
@@ -91,11 +90,6 @@ Link to open the website: http://localhost:8080/Todolist.html
 * Add a "Clear All" button.
 * Implement task categories (Work, Personal, etc.).
 
-
-## Leticia's Favorite Quote 
-* Genesis 18:14
-* Is anything too hard for the Lord? I will return to you at the appointed time next year, and Sarah will have a son.
-* There are a lot of things that are hard for me, but I like to think about this scripture, cause no miracle is too hard for the Lord, His plan will happen. 
 
 ## Favorite quote Diogo Rangel
 * I am I in circustances. If I don't save them, I cannot save myself- José Y Ortega

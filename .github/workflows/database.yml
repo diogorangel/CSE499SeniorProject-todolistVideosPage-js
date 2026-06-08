@@ -1,0 +1,37 @@
+database:
+  name: taskmanager
+  engine: sqlite3
+  tables:
+    - name: users
+      columns:
+        - name: id
+          type: INTEGER
+          primary_key: true
+          autoincrement: true
+        - name: username
+          type: TEXT
+
+    - name: tasks
+      columns:
+        - name: id
+          type: INTEGER
+          primary_key: true
+          autoincrement: true
+        - name: task_name
+          type: TEXT
+        - name: due_date
+          type: TEXT
+          description: "Stored as ISO8601 string or YYYY-MM-DD"
+        - name: description
+          type: TEXT
+        - name: assignee_id
+          type: INTEGER
+        - name: completed
+          type: INTEGER
+          default: 0
+          description: "0 for false, 1 for true"
+      foreign_keys:
+        - column: assignee_id
+          references:
+            table: users
+            column: id

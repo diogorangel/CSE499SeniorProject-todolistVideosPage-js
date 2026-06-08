@@ -17,7 +17,7 @@ function urlify(text) {
     if (!text) return '';
     const urlRegex = /(https?:\/\/[^\s]+)/g;
     return text.replace(urlRegex, function(url) {
-        return `<a href="${url}" target="_blank" style="color: #ff5c8a; font-weight: bold; text-decoration: underline;">${url}</a>`;
+        return `<a href="${url}" target="_blank" style="color: #5c5fff; font-weight: bold; text-decoration: underline;">${url}</a>`;
     });
 }
 

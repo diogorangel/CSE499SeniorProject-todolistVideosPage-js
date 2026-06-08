@@ -5,7 +5,6 @@
     <meta charset="UTF-8">
     <title>To-Do List Kanban</title>
     <meta name="author" content="Diogo Rangel Dos Santos">
-    <meta name="author" content="Leticia Mahomed da Silva">
     <meta name="description" content="A simple to-do list application built with JavaScript - Diogo Rangel">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -60,22 +59,20 @@
                     <option value="Set due dates to stay on track">📅 Set due dates to stay on track</option>
                     <option value="Assign tasks to team members">👥 Assign tasks to team members</option>
                     <option value="Add descriptions for context">📝 Add descriptions for context</option>
-                    <option value="CUSTOM_OPTION" style="color: #ff5c8a; font-weight: bold;">➕ Type custom text...
+                    <option value="CUSTOM_OPTION" style="color: #5c5cff; font-weight: bold;">➕ Type custom text...
                     </option>
                 </select>
                 <input type="date" id="taskDate">
                 <select id="assignee" class="form-select" onchange="checkEditable(this)">
                     <option value="" disabled selected>Assignee</option>
                     <option value="Diogo Rangel Dos Santos">Diogo Rangel Dos Santos</option>
-                    <option value="Leticia Mahomed da Silva">Leticia Mahomed da Silva</option>
-                    <option value="CUSTOM_OPTION" style="color: #ff5c8a; font-weight: bold;">➕ Type custom assignee...</option>
+                    <option value="CUSTOM_OPTION" style="color: #4959e9; font-weight: bold;">➕ Type custom assignee...</option>
                 </select>
 
                 <select id="creator" class="form-select" onchange="checkEditable(this)">
                     <option value="" disabled selected>Created by</option>
                     <option value="Diogo Rangel Dos Santos">Diogo Rangel Dos Santos</option>
-                    <option value="Leticia Mahomed da Silva">Leticia Mahomed da Silva</option>
-                    <option value="CUSTOM_OPTION" style="color: #ff5c8a; font-weight: bold;">➕ Type custom creator...</option>
+                    <option value="CUSTOM_OPTION" style="color: #6751f8; font-weight: bold;">➕ Type custom creator...</option>
                 </select>
 
                 <input type="text" id="oneWord" placeholder="One Word">
@@ -83,14 +80,13 @@
             </div>
 
             <button id="addButton" class="w-100 mb-4">Create Card</button>
-            <div id="taskCounter" style="margin-top: 15px; font-weight: bold; color: #ff5c8a;">Total Tasks: 0</div>
+            <div id="taskCounter" style="margin-top: 15px; font-weight: bold; color: hsl(237, 80%, 54%);">Total Tasks: 0</div>
             <div id="cardContainer"></div>
         </div>
     </div>
 
     <footer class="text-center mt-4 mb-2">
         <p>&copy; 2026 Diogo Rangel Dos Santos. All rights reserved. <a href="https://www.linkedin.com/in/diogorangels/" target="_blank">Diogo Rangel Dos Santos</a>. All Rights Reserved.</p>
-        <p>&copy; 2026 Leticia Mahomed da Silva. All rights reserved. <a href="https://www.linkedin.com/in/letmahomed/" target="_blank">Leticia Mahomed da Silva</a>. All Rights Reserved.</p>
     </footer>
 
     <script src="scripts/script.js?v=2"></script>
