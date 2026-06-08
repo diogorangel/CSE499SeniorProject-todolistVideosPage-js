@@ -73,7 +73,7 @@ Link to open the website: http://localhost:8080/Todolist.html
    
 
 ## Software Demo Video
-* [Link to your YouTube/Loom video here](https://www.loom.com/share/2bbf9d36d42b4200b1aef99093c415ef)
+* [Link to your YouTube/Loom video here](https://www.loom.com/share/a34ef3322d614bf5b373415d17dde2d1)
 * [Link of website live](https://diogorangel.github.io/project-todolist-js/src/main/resources/static/Todolist.html)
 * [Local Link](http://localhost:8080/Todolist.html)
 
