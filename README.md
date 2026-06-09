@@ -34,8 +34,11 @@ This project is a full-stack Task Management application developed as part of a 
 4. Run the application using the Maven Wrapper:
    * mvn spring-boot:run
 
-   
-Link to open the website: http://localhost:8080/Todolist.html
+
+## Software Demo Video
+* [Link of website live](https://cse499seniorproject-todolistvideospage-js.onrender.com/Todolist.html)
+* [Local Link](http://localhost:8080/Todolist.html)
+* [Link to your YouTube/Loom video here](https://www.loom.com/share/a34ef3322d614bf5b373415d17dde2d1)
 
 5. Others commands mvn:
 ### Spring Boot Commands
@@ -74,10 +77,6 @@ Link to open the website: http://localhost:8080/Todolist.html
   ```mvn clean install -U```
    
 
-## Software Demo Video
-* [Link to your YouTube/Loom video here](https://www.loom.com/share/a34ef3322d614bf5b373415d17dde2d1)
-* [Link of website live](https://diogorangel.github.io/project-todolist-js/src/main/resources/static/Todolist.html)
-* [Local Link](http://localhost:8080/Todolist.html)
 
 ## Development Environment
 * Language: JavaScript (Vanilla)
